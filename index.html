@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/fixedheader/3.2.0/css/fixedHeader.bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css"
+    />
+    <title>Data Balita Posyandu</title>
+  </head>
+  <style>
+	body {
+	background-color : white;
+	}
+	
+	.container1 .navbar{
+		position: fixed;
+		padding-top: 10px;
+		margin-bottom: 80px;
+		display: flex;
+		color: green;
+	}
+	
+	.navbar{
+		padding-left: 30px;
+		background-color: #008000;
+		width: 100%;
+		z-index: 1000;
+	}
+	
+	.navbar img{
+		height: 7rem;
+		width: 8.5rem;
+		cursor: pointer;
+	}
+	
+	.navbar h3{
+		cursor: pointer;
+		color: Orange;
+		padding-left: 10px;
+	}
+	
+	.navbar .navbar-item{
+		align-item: right;
+		margin-right: 2rem;
+		margin-left: 12rem;
+		margin-top: auto;
+		margin-bottom: 2rem;
+		font-family: arial, sans-serif;
+		font-size: 18px;
+		color: yellow;
+	}
+	
+	.navbar .navbar-item:hover{
+		color: white;
+		text-decoration: none;
+	}
+	
+	
+	.container h3{
+		margin-top: 120px;
+	}
+	
+	@media (max-width: 768px) {
+    .navbar {
+        width: 75%; /* buat navbar penuh lebar */
+        left: 0; /* posisikan di sisi kiri */
+		}
+	}
+  </style>
+  <body">
+	<div class="container1">
+		<div class="navbar">
+			<image src="3573.png"></image>
+			<h3>PUSKESMAS MOJOLANGU</h3>
+			<a href="#" class="navbar-item">Home</a>
+			<a href="#" class="navbar-item">About</a>
+			<a href="#" class="navbar-item">Services</a>
+			<a href="#" class="navbar-item">Contact</a>
+		</div>
+		
+	</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3 class="text-center mb-4">Data Balita Posyandu Tunjungsekar RW.02</h3>
+          <h4 class="text-center mb-4" id="packageName"></h4>
+          <br>
+          <br>
+          <a href="input.html" type="button" class="btn btn-primary mt-3 mb-3">+ Balita Baru</a>
+		  <label for="bulan">Pilih Bulan:</label>
+    <select id="bulan" name="bulan">
+        <option value="januari">Januari</option>
+        <option value="februari">Februari</option>
+        <option value="maret">Maret</option>
+        <option value="april">April</option>
+        <option value="mei">Mei</option>
+        <option value="juni">Juni</option>
+        <option value="juli">Juli</option>
+        <option value="agustus">Agustus</option>
+		<option value="september">September</option>
+		<option value="oktober">Oktober</option>
+		<option value="november">November</option>
+		<option value="desember">Desember</option>
+    </select>
+          <br>
+          <br>
+          <table
+            id="example"
+            class="table table-striped table-bordered mt-2 mb-2"
+            style="width: 100%"
+          ></table>
+          <br />
+          <br />
+          <p id="passingGrade"></p>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.0/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script type="text/javascript" src="data.json"></script> -->
+    <script type="text/javascript">
+    $(document).ready(function () {
+        const table = $("#example").DataTable({
+            ajax: "https://script.google.com/macros/s/AKfycbwhPfoEGZAaPhoH57bNa7O-_HrJtAZpqKUjMKtor6ZvX_fBXtxsk6nBdZNuBKVhwvnKyQ/exec",
+            columns: [
+    {
+        title: "Nama Anak",
+        data: "nama_anak",
+    },
+    {
+        title: "Nama Orang Tua",
+        data: "nama_orang_tua",
+    },
+    {
+        title: "Usia (bulan)",
+        data: function(row) {
+            const monthIndex = $("#bulan").val();
+            switch (monthIndex) {
+                case "januari":
+                    return row.usia1;
+                case "februari":
+                    return row.usia2;
+                case "maret":
+                    return row.usia3;
+                case "april":
+                    return row.usia4;
+                case "mei":
+                    return row.usia5;
+                case "juni":
+                    return row.usia6;
+                case "juli":
+                    return row.usia7;
+                case "agustus":
+                    return row.usia8;
+                case "september":
+                    return row.usia9;
+                case "oktober":
+                    return row.usia10;
+                case "november":
+                    return row.usia11;
+                case "desember":
+                    return row.usia12;
+                default:
+                    return "Data Tidak Tersedia";
+            }
+        }
+    },
+    {
+        title: "Berat Badan (Kg)",
+        data: function(row) {
+            const monthIndex = $("#bulan").val();
+            switch (monthIndex) {
+                case "januari":
+                    return row.bb1;
+                case "februari":
+                    return row.bb2;
+                case "maret":
+                    return row.bb3;
+                case "april":
+                    return row.bb4;
+                case "mei":
+                    return row.bb5;
+                case "juni":
+                    return row.bb6;
+                case "juli":
+                    return row.bb7;
+                case "agustus":
+                    return row.bb8;
+                case "september":
+                    return row.bb9;
+                case "oktober":
+                    return row.bb10;
+                case "november":
+                    return row.bb11;
+                case "desember":
+                    return row.bb12;
+                default:
+                    return "Data Tidak Tersedia";
+            }
+        }
+    },
+    {
+        title: "Tinggi Badan (cm)",
+        data: function(row) {
+            const monthIndex = $("#bulan").val();
+            switch (monthIndex) {
+                case "januari":
+                    return row.tb1;
+                case "februari":
+                    return row.tb2;
+                case "maret":
+                    return row.tb3;
+                case "april":
+                    return row.tb4;
+                case "mei":
+                    return row.tb5;
+                case "juni":
+                    return row.tb6;
+                case "juli":
+                    return row.tb7;
+                case "agustus":
+                    return row.tb8;
+                case "september":
+                    return row.tb9;
+                case "oktober":
+                    return row.tb10;
+                case "november":
+                    return row.tb11;
+                case "desember":
+                    return row.tb12;
+                default:
+                    return "Data Tidak Tersedia";
+            }
+        }
+    },
+    {
+        title: "Lihat Hasil",
+        data: null,
+        render: function(data, type, row) {
+            return '<button class="btn btn-primary" onclick="alertAction(' + row.nim + ')">Kirim Hasil</button>';
+        }
+    }
+],
+            rowId: "nim",
+            liveAjax: true,
+        });
+        // Event listener untuk merubah tabel saat bulan dipilih
+        $("#bulan").change(function() {
+            table.ajax.reload(); // Reload data table saat bulan berubah
+        });
+        
+
+    });
+	
+</script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+  </body>
+</html>
